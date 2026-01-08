@@ -13,7 +13,6 @@ public:
                 return ret;
             ret = -1e9;
             ret = max(ret , calc(idx1+1,idx2,is_empty));
-            ret = max(ret , calc(idx1+1,idx2+1,is_empty));
             ret = max(ret ,(nums1[idx1]*nums2[idx2]) + calc(idx1+1,idx2+1,1));
             ret = max(ret , calc(idx1,idx2+1,is_empty));
             return ret;
