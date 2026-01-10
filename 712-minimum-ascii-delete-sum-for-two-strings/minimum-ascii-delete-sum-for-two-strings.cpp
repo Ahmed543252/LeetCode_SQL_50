@@ -1,36 +1,27 @@
 class Solution {
 public:
     int minimumDeleteSum(string s1, string s2) {
-        // state of dp is i , j
         int n = s1.size(), m = s2.size();
-        vector dp(n + 2, vector<int>(m + 2, -1));
-        function<int(int, int)> calc = [&](int i, int j) -> int {
-            if (i == n && j == m)
-                return 0;
-            if(i==n){
-                int sum = 0 ;
-                for(int k = j ; k < m ;k++){
-                    sum+=int(s2[k]);
+        vector dp(n + 1, vector<int>(m + 1, 0));
+        for (int j = m - 1; j >= 0; j--) {
+            dp[n][j] = dp[n][j + 1] + s2[j];
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i][m] = dp[i + 1][m] + s1[i];
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = m - 1; j >= 0; j--) {
+                if (s1[i] == s2[j]) {
+                    dp[i][j] = dp[i + 1][j + 1];
+                } else {
+                    dp[i][j] = min(
+                        s1[i] + dp[i + 1][j],
+                        s2[j] + dp[i][j + 1]
+                    );
                 }
-                return sum;
             }
-            if(j==m){
-                int sum = 0 ;
-                for(int k = i ; k < n ;k++){
-                    sum+=int(s1[k]);
-                }
-                return sum;
-            }
-            int& ret = dp[i][j];
-            if (~ret)
-                return ret;
-            ret = 1e9;
-            if (s1[i] == s2[j])
-                ret = min(ret, calc(i + 1, j + 1));
-            ret = min(ret, int(s1[i]) + calc(i + 1, j));
-            ret = min(ret, int(s2[j]) + calc(i, j + 1));
-            return ret;
-        };
-        return calc(0, 0);
+        }
+
+        return dp[0][0];
     }
 };
