@@ -6,7 +6,7 @@ public:
         int n = ratings.size();
         vector<int>have(n,1);
         for(int i = 1 ; i < n ; i++){
-            if(ratings[i]>ratings[i-1]&& have[i]<=have[i-1]){
+            if(ratings[i]>ratings[i-1]){
                 have[i]+=have[i-1];
             }
         }
