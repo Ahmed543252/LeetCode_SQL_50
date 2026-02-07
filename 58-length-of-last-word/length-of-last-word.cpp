@@ -11,8 +11,7 @@ public:
                 break;
             }
         }
-        int ans = r - l + 1 ;
-        ans--;
+        int ans = r - l  ;
         return ans ;
     }
 };
