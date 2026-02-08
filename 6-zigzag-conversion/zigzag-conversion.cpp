@@ -2,7 +2,7 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         vector<vector<char>> me(numRows+2);
-        if(numRows==1  || numRows>=s.size())
+        if(numRows==1  )
             return s;
         int idx = 0 , cur = 1;
         for(auto it : s){
