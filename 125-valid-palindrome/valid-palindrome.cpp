@@ -10,11 +10,11 @@ public:
                 me+=it;
             }
         }
-        string me2 = me;
-        reverse(me2.begin(),me2.end());
-        cout << me <<endl<<me2;
-        if(me != me2)
+      int n = me.size();
+      for(int i = 0 ;i < n/2 ; i++){
+        if(me[i]!=me[n-i-1])
         return false;
-        return true;
+      }
+      return true;
     }
 };
